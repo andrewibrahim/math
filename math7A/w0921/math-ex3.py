@@ -4,33 +4,38 @@
 # A*Cx/B + A*D/B + Ex + F = Gx + H 
 # Rules A-H must be 1-9 each number used at most 1 time
 
-#cards = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 cards = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
-
+# print helper function
 def pf(x):
 	print(x, flush=True)
 	return
 
-def remainingCards(c, cl):
+# returns remaning cards after excluding passed in card
+def remainingCards(exclude_card, cl):
 	cardList = range(0,len(cl))
 	remaingCards = []
 
 	for a in cardList:
-		if (c != a):
+		if (exclude_card != a):
 			remaingCards.append(cl[a])
 
 	return remaingCards
 
+# count how many loops were run
+count = 0
 
+# start loop with all cards
 aCards = cards
 aCardsR = range(0, len(aCards))
 
 for a in aCardsR:
+	# remove card A from deck
 	bCards = remainingCards(a, aCards)
 	bCardsR = range(0, len(bCards))
    
 	for b in bCardsR:
+		# remove card B from deck
 		cCards = remainingCards(b, bCards)
 		cCardsR = range(0, len(cCards))
 	
@@ -55,9 +60,9 @@ for a in aCardsR:
 							hCardsR = range(0, len(hCards))
 						
 							for h in hCardsR:
-
+								# convert card value to strings to match equation
 								answerString = str(aCards[a]) + "/" + str(bCards[b]) + "(" + str(cCards[c]) + "x + " + str(dCards[d]) + ") + " + str(eCards[e]) + "x + " + str(fCards[f]) + " = " + str(gCards[g]) + "x + " + str(hCards[h])
-								# pf(answerString)
+								count = count + 1
 
 								# EQ: A*Cx/B + A*D/B + Ex + F = Gx + H
 								# LeftX = A*Cx/B + Ex
@@ -65,13 +70,15 @@ for a in aCardsR:
 								# RightX = Gx
 								# RightConst = H
 
+								# assign valus to like terms for each side of the equation
 								leftX = aCards[a]*cCards[c]/bCards[b] + eCards[e]
 								leftConst = aCards[a]*dCards[d]/bCards[b] + fCards[f]
 								rightX = gCards[g]
 								rightConst =hCards[h]
 
+								# prints if the all the like terms are equal
 								if ((leftX == rightX) and (leftConst == rightConst)):
 									pf(answerString)
 
 
-
+pf(str(count)+ " loops were run.")
