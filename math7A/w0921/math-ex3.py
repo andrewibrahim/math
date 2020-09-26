@@ -24,6 +24,7 @@ def remainingCards(exclude_card, cl):
 
 # count how many loops were run
 count = 0
+answers = 0
 
 # start loop with all cards and remove current card from remaining subloops
 aCards = cards
@@ -65,5 +66,8 @@ for a in range(0, len(aCards)):
 								# prints if the all the like terms are equal
 								if ((leftX == rightX) and (leftConst == rightConst)):
 									pf(answerString)
+									answers = answers + 1
 
+
+pf("There are "+str(answers)+" answers.")
 pf(str(count)+ " loops were run.")

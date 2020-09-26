@@ -23,38 +23,27 @@ def remainingCards(exclude_card, cl):
 
 # count how many loops were run
 count = 0
+answers = 0
 
-# start loop with all cards
+# start loop with all cards and remove current card from remaining subloops
 aCards = cards
-aCardsR = range(0, len(aCards))
 
-for a in aCardsR:
+# loop through all cards in deck
+for a in range(0, len(aCards)):
 	# remove card A from deck
 	bCards = remainingCards(a, aCards)
-	bCardsR = range(0, len(bCards))
-   
-	for b in bCardsR:
+	for b in range(0, len(bCards)):
 		# remove card B from deck
 		cCards = remainingCards(b, bCards)
-		cCardsR = range(0, len(cCards))
-	
-		for c in cCardsR:
+		for c in range(0, len(cCards)):
 			dCards = remainingCards(c, cCards)
-			dCardsR = range(0, len(dCards))
-		
-			for d in dCardsR:
+			for d in range(0, len(dCards)):
 				eCards = remainingCards(d, dCards)
-				eCardsR = range(0, len(eCards))
-			
-				for e in eCardsR:
+				for e in range(0, len(eCards)):
 					fCards = remainingCards(e, eCards)
-					fCardsR = range(0, len(fCards))
-				
-					for f in fCardsR:
+					for f in range(0, len(fCards)):
 						gCards = remainingCards(f, fCards)
-						gCardsR = range(0, len(gCards))
-					
-						for g in gCardsR:
+						for g in range(0, len(gCards)):
 							# convert card value to strings to match equation
 							answerString = str(aCards[a]) + "x + " + str(bCards[b]) + "x + " + str(cCards[c]) + " + " + str(dCards[d]) + "x = " + str(eCards[e]) + " + " + str(fCards[f]) + "x + " + str(gCards[g])
 							count = count + 1
@@ -66,14 +55,16 @@ for a in aCardsR:
 							# RightConst = E+G
 
 							# assign valus to like terms for each side of the equation
-							leftX = aCards[a]+bCards[b]+dCards[d]
+							leftX = aCards[a] + bCards[b] + dCards[d]
 							leftConst = cCards[c]
 							rightX = fCards[f]
-							rightConst = eCards[e]+gCards[g]
+							rightConst = eCards[e] + gCards[g]
 
 							# prints if the all the like terms are equal
 							if ((leftX == rightX) and (leftConst == rightConst)):
 								pf(answerString)
+								answers = answers + 1
 
+pf("There are " + str(answers) + " answers.")
 pf(str(count)+ " loops were run.")
 
